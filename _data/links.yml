@@ -1,0 +1,23 @@
+# The directory of external sites. Edit freely; groups appear in order.
+- group: Catholicism
+  sites:
+    - name: Divinum Officium
+      url: https://www.divinumofficium.com/
+    - name: Missale Romanum (1962)
+      url: https://www.missalemeum.com/en/ordo
+    - name: Biblia Sacra (Vulgatae et Douay-Rheims)
+      url: https://drbo.org/drl/index.htm
+    - name: Catechism of the Council of Trent
+      url: https://archive.org/details/cu31924029395799/mode/2up
+
+- group: Miscellaneous
+  sites:
+    - name: Project Gutenberg
+      url: https://www.gutenberg.org/
+
+- group: The Author of this Website, Elsewhere
+  sites:
+    - name: MyAnimeList
+      url: https://myanimelist.net/profile/Thermos31
+    - name: Discord
+      handle: aufvektor

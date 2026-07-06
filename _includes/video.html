@@ -1,0 +1,21 @@
+{% if include.youtube %}
+{% assign yt_id = include.youtube | split: "youtu.be/" | last | split: "watch?v=" | last | split: "embed/" | last | split: "&" | first | split: "?" | first %}
+<figure class="entry-figure entry-video">
+  <div class="entry-video-frame">
+    <iframe src="https://www.youtube-nocookie.com/embed/{{ yt_id }}" title="{{ include.caption | default: 'Video' }}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+  </div>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
+{% else %}
+{% assign vid_src = include.src %}
+{% assign vid_first = vid_src | slice: 0, 1 %}
+{% unless vid_first == "/" or vid_src contains "://" %}{% assign vid_src = vid_src | prepend: "/" %}{% endunless %}
+<figure class="entry-figure entry-video">
+  <video controls preload="metadata" src="{{ vid_src | relative_url }}">
+    <a href="{{ vid_src | relative_url }}">Download the recording</a>.
+  </video>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
+{% endif %}

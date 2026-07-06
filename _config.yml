@@ -1,0 +1,17 @@
+title: aufvektor
+description: From one of the last Europeans of old
+url: "https://aufvektor.github.io"
+
+markdown: kramdown
+permalink: /posts/:title/
+future: true
+
+collections:
+  reposts:
+    output: false
+
+exclude:
+  - README.md
+  - terrydavis.mp4
+  - build.rb
+  - preview.sh

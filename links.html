@@ -1,0 +1,25 @@
+---
+layout: default
+title: Links
+permalink: /links/
+---
+<div class="page-content">
+  <h1>Links</h1>
+
+  {% for group in site.data.links %}
+  <h2 class="archive-year">{{ group.group }}</h2>
+  <ul class="directory-list">
+    {% for site_entry in group.sites %}
+    <li>
+      {% if site_entry.url %}
+      <a href="{{ site_entry.url }}" rel="noopener">{{ site_entry.name }}</a>
+      <span class="directory-domain">{{ site_entry.url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first }}</span>
+      {% else %}
+      <span class="directory-name">{{ site_entry.name }}</span>
+      <span class="directory-domain">{{ site_entry.handle }}</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</div>

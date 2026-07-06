@@ -1,0 +1,17 @@
+# What is presently being read (current) and what is queued (next).
+# Shown on the front page.
+current:
+  - title: "They Have Uncrowned Him: From Liberalism to Apostasy - The Conciliar Tragedy"
+    author: Archbishop Marcel Lefebvre
+    begun: June 2026
+
+  - title: "[Book of a Political Nature]"
+    author: "[Redacted]"
+    begun: June 2026
+
+next:
+  - title: "Pascendi Dominici Gregis: On the Doctrine of the Modernists"
+    author: St Pope Pius X
+
+  - title: "Mit Brennender Sorge: On the Church and On the German Reich"
+    author: St Pope Pius XII

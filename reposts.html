@@ -1,0 +1,39 @@
+---
+layout: default
+title: Reposts
+permalink: /reposts/
+---
+<div class="page-content">
+  <h1>Reposts</h1>
+  {% assign items = site.reposts | sort: 'date' | reverse %}
+  {% if items.size > 0 %}
+  {% for repost in items %}
+  <article class="repost">
+    <div class="post-list-meta">
+      <span class="post-list-number">{{ repost.source | default: "Elsewhere" }}</span>
+      <time datetime="{{ repost.date | date_to_xmlschema }}">{{ repost.date | date: "%-d %B %Y" }}</time>
+    </div>
+    {% if repost.link %}
+    <h2><a href="{{ repost.link }}" rel="noopener">{{ repost.title }}&nbsp;&#8599;</a></h2>
+    {% else %}
+    <h2>{{ repost.title }}</h2>
+    {% endif %}
+    {% if repost.audio %}
+    <audio class="repost-audio" controls preload="none" src="{{ repost.audio | relative_url }}">
+      <a href="{{ repost.audio | relative_url }}">Download the recording</a>.
+    </audio>
+    {% endif %}
+    {% if repost.video %}
+    <video class="repost-video" controls preload="metadata" src="{{ repost.video | relative_url }}">
+      <a href="{{ repost.video | relative_url }}">Download the recording</a>.
+    </video>
+    {% endif %}
+    <div class="repost-commentary">
+      {{ repost.content }}
+    </div>
+  </article>
+  {% endfor %}
+  {% else %}
+  <p class="empty-note">Nothing has yet been passed on.</p>
+  {% endif %}
+</div>

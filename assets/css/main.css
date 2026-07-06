@@ -1,0 +1,956 @@
+/* ============================================================
+   aufvektor — after the manner of the old service books:
+   white letter on a black ground, rubricated in red.
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --void: #000000;
+  --panel: #2e2b29;
+  --panel-deep: #262422;
+  --panel-edge: #6a655e;
+  --text: #e8e3d8;
+  --heading: #f5f1e8;
+  --muted: #a89e8d;
+  --faint: #7d7466;
+  --rule: #4d4841;
+  --rubric: #e04b33;
+  --rubric-dim: #a5392a;
+  --azure: #8d8dff;
+}
+
+::selection {
+  background: var(--rubric);
+  color: var(--void);
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  position: relative;
+  font-family: 'IM Fell English', 'Georgia', serif;
+  background: var(--void);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 2.75rem 1.25rem;
+  min-height: 100vh;
+}
+
+/* ---------- Red vines in the outer margins, centred in the gap ---------- */
+
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  background-image: url("../images/vine-left.svg");
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: 150px 1560px;
+  pointer-events: none;
+}
+
+body::after {
+  background-image: url("../images/vine-right.svg");
+}
+
+body::before {
+  left: calc((100vw - 46rem) / 4);
+  transform: translateX(-50%);
+}
+
+body::after {
+  right: calc((100vw - 46rem) / 4);
+  transform: translateX(50%);
+}
+
+/* ---------- The panel: content set apart from the ground ---------- */
+
+.folio {
+  max-width: 46rem;
+  margin: 0 auto;
+  background: linear-gradient(178deg, var(--panel) 0%, var(--panel-deep) 100%);
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 0 0 4px var(--void), 0 0 0 5px var(--rule);
+  padding: 3rem 3.25rem 2.5rem;
+}
+
+a {
+  color: var(--azure);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(141, 141, 255, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+a:hover {
+  color: var(--rubric);
+  border-bottom-color: var(--rubric);
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  text-align: center;
+  border-bottom: 3px double var(--rule);
+  padding-bottom: 1.8rem;
+  margin-bottom: 2.75rem;
+}
+
+.masthead-cross {
+  color: var(--rubric);
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.site-title {
+  font-family: 'UnifrakturMaguntia', 'IM Fell English', serif;
+  font-size: 3.4rem;
+  line-height: 1.1;
+  color: var(--heading);
+  border-bottom: none;
+}
+
+.site-title:hover {
+  color: var(--rubric);
+}
+
+.site-motto {
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--rubric);
+  margin-top: 0.8rem;
+}
+
+.site-tagline {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+.site-nav {
+  margin-top: 1.4rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  color: var(--azure);
+  border-bottom: none;
+  padding: 0 0.45rem;
+}
+
+.site-nav a:hover {
+  color: var(--rubric);
+}
+
+.nav-sep {
+  color: var(--rubric);
+}
+
+/* ---------- Epigraph & section headings ---------- */
+
+.epigraph {
+  border: none;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--muted);
+  max-width: 30rem;
+  margin: 0 auto 2.5rem;
+}
+
+.epigraph cite {
+  display: block;
+  margin-top: 0.55rem;
+  font-style: normal;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.section-heading {
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--rubric);
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+
+/* ---------- Home: the record ---------- */
+
+.featured {
+  margin-bottom: 3rem;
+}
+
+.featured-entry {
+  background: var(--panel-deep);
+  border: 1px solid var(--rule);
+  padding: 1.8rem 2rem;
+}
+
+.featured-entry h2,
+.post-list-item h2 {
+  font-family: 'IM Fell English SC', 'IM Fell English', serif;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.55rem;
+}
+
+.featured-entry h2 {
+  font-size: 1.85rem;
+}
+
+.post-list-item h2 {
+  font-size: 1.5rem;
+}
+
+.featured-entry h2 a,
+.post-list-item h2 a {
+  color: var(--heading);
+  border-bottom: none;
+}
+
+.featured-entry h2 a:hover,
+.post-list-item h2 a:hover {
+  color: var(--rubric);
+}
+
+.post-list-item {
+  padding: 1.9rem 0;
+}
+
+.post-list-item + .post-list-item {
+  border-top: 1px solid var(--rule);
+}
+
+.post-list-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.55rem;
+}
+
+.post-list-number {
+  color: var(--rubric);
+}
+
+.post-list-excerpt {
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+
+.post-list-more {
+  font-size: 0.95rem;
+}
+
+.post-list-more a {
+  font-style: italic;
+  border-bottom: none;
+}
+
+.archive-pointer {
+  text-align: center;
+  margin-top: 1.8rem;
+  font-size: 0.95rem;
+}
+
+.archive-pointer a {
+  font-style: italic;
+  border-bottom: none;
+}
+
+.commonplace-teaser {
+  border-top: 3px double var(--rule);
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+}
+
+.commonplace-teaser .epigraph {
+  margin-bottom: 0;
+}
+
+.commonplace-teaser .archive-pointer {
+  margin-top: 1.3rem;
+}
+
+.empty-note {
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ---------- Posts ---------- */
+
+.post-header {
+  text-align: center;
+  margin-bottom: 2.4rem;
+}
+
+.post-kicker {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin-bottom: 0.9rem;
+}
+
+.post-header h1 {
+  font-family: 'UnifrakturMaguntia', 'IM Fell English', serif;
+  font-weight: 400;
+  font-size: 2.7rem;
+  line-height: 1.15;
+  color: var(--heading);
+  margin-bottom: 0.5rem;
+}
+
+.post-header-rule {
+  color: var(--rubric);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-header time {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.post-content p,
+.page-content p {
+  margin-bottom: 1.35rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* The rubricated initial, as the old missals began their prayers */
+.dropcap > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.2em;
+  line-height: 0.85;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--rubric);
+}
+
+.post-content h2,
+.page-content h2 {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: var(--rubric);
+  margin: 2.2rem 0 0.9rem;
+}
+
+.post-content h3,
+.page-content h3 {
+  font-family: 'IM Fell English SC', serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--rubric);
+  margin: 1.8rem 0 0.7rem;
+}
+
+.post-content ul,
+.post-content ol,
+.page-content ul,
+.page-content ol {
+  margin: 0 0 1.35rem 1.7rem;
+}
+
+.post-content li,
+.page-content li {
+  margin-bottom: 0.3rem;
+}
+
+blockquote {
+  border-left: 2px solid var(--rubric);
+  padding-left: 1.3rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 1.35rem;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--rule);
+  padding: 0.1em 0.4em;
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin-bottom: 1.35rem;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+hr {
+  border: none;
+  text-align: center;
+  margin: 2.4rem 0;
+}
+
+hr::after {
+  content: "✠  ✠  ✠";
+  color: var(--rubric);
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+}
+
+.post-end {
+  text-align: center;
+  color: var(--rubric);
+  font-size: 1.4rem;
+  margin: 2.7rem 0 1.7rem;
+}
+
+.post-nav {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.post-nav a {
+  border-bottom: none;
+}
+
+/* ---------- Figures ---------- */
+
+.entry-figure {
+  margin: 0 0 2.4rem;
+}
+
+.entry-figure img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 0 0 3px var(--panel-deep), 0 0 0 4px var(--rule);
+}
+
+.post-content .entry-figure {
+  margin: 2.4rem 0;
+}
+
+/* plain markdown images inside a post get the same frame */
+.post-content p > img:only-child {
+  display: block;
+  width: 100%;
+  margin: 2.4rem 0;
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 0 0 3px var(--panel-deep), 0 0 0 4px var(--rule);
+}
+
+.entry-video video {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 0 0 3px var(--panel-deep), 0 0 0 4px var(--rule);
+}
+
+.entry-video-frame {
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 0 0 3px var(--panel-deep), 0 0 0 4px var(--rule);
+}
+
+.entry-video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.manuscript {
+  margin-top: 2.4rem;
+}
+
+.manuscript-leaf {
+  margin-bottom: 2.75rem;
+}
+
+/* The codex viewer: two leaves shown as an open book */
+
+.codex-viewer {
+  margin-top: 2.4rem;
+}
+
+.codex-spread {
+  display: flex;
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 0 0 3px var(--panel-deep), 0 0 0 4px var(--rule);
+}
+
+.codex-page {
+  position: relative;
+  width: 50%;
+  aspect-ratio: 1100 / 1500;
+  background: #f6f2e6;
+  cursor: pointer;
+  user-select: none;
+}
+
+.codex-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* gutter shadow toward the spine */
+.codex-page-left::after,
+.codex-page-right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7%;
+  pointer-events: none;
+}
+
+.codex-page-left::after {
+  right: 0;
+  background: linear-gradient(to right, transparent, rgba(60, 45, 20, 0.28));
+}
+
+.codex-page-right::after {
+  left: 0;
+  background: linear-gradient(to left, transparent, rgba(60, 45, 20, 0.22));
+}
+
+.codex-page:not(.codex-end):hover img {
+  filter: brightness(0.955);
+}
+
+.codex-page.codex-end {
+  cursor: default;
+}
+
+.codex-page.codex-blank {
+  background:
+    linear-gradient(178deg, #efe9d8 0%, #e6dcc4 100%);
+}
+
+.codex-texts {
+  display: flex;
+  gap: 1.6rem;
+  margin-top: 1.1rem;
+}
+
+.codex-text {
+  width: 50%;
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.codex-text p {
+  margin-bottom: 0.5rem;
+}
+
+.codex-text p:last-child {
+  margin-bottom: 0;
+}
+
+.leaf-text {
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 0.7rem;
+}
+
+.leaf-text p {
+  margin-bottom: 0.5rem;
+}
+
+.leaf-text p:last-child {
+  margin-bottom: 0;
+}
+
+.codex-caption {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 0.8rem;
+}
+
+.codex-hint {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--faint);
+  margin-top: 0.35rem;
+}
+
+.entry-figure figcaption {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 0.8rem;
+}
+
+/* ---------- Archive ---------- */
+
+.page-lede {
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2.2rem;
+}
+
+.archive-year {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: var(--rubric);
+  text-align: center;
+  margin: 1.9rem 0 1rem;
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0 0 1.4rem !important;
+}
+
+.archive-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0 !important;
+}
+
+.archive-list time {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  min-width: 5.5rem;
+  white-space: nowrap;
+}
+
+.archive-list a {
+  color: var(--text);
+  border-bottom: none;
+}
+
+.archive-list a:hover {
+  color: var(--rubric);
+}
+
+.archive-kind {
+  margin-left: auto;
+  font-family: 'Cinzel', serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+/* ---------- Commonplace book ---------- */
+
+.commonplace-entry {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.6rem 0;
+}
+
+.commonplace-entry blockquote {
+  border-left: none;
+  padding-left: 0;
+  text-align: center;
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+}
+
+.commonplace-entry blockquote p {
+  text-align: center !important;
+  margin-bottom: 0 !important;
+}
+
+.commonplace-source {
+  text-align: center !important;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0 !important;
+}
+
+/* ---------- Currently reading ---------- */
+
+.reading {
+  border-top: 3px double var(--rule);
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+}
+
+.reading-list {
+  list-style: none;
+  text-align: center;
+  margin: 0 !important;
+}
+
+.reading-list li {
+  margin-bottom: 0.7rem;
+}
+
+.reading-title {
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--heading);
+}
+
+.reading-author {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: 0.6rem;
+}
+
+.reading-subheading {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em; /* balance the trailing letter-space so it centres truly */
+  text-transform: uppercase;
+  color: var(--rubric);
+  text-align: center;
+  margin: 1.8rem auto 0.9rem;
+}
+
+.reading-since {
+  display: block;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--faint);
+  margin-top: 0.15rem;
+}
+
+/* ---------- Links directory ---------- */
+
+.directory-list {
+  list-style: none;
+  margin: 0 0 1.4rem !important;
+}
+
+.directory-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0 !important;
+}
+
+.directory-list a,
+.directory-name {
+  color: var(--text);
+  border-bottom: none;
+}
+
+.directory-list a:hover {
+  color: var(--rubric);
+}
+
+.directory-domain {
+  margin-left: auto;
+  font-family: 'Cinzel', serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ---------- Reposts ---------- */
+
+.repost {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.7rem 0;
+}
+
+.repost h2 {
+  font-family: 'IM Fell English SC', 'IM Fell English', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+}
+
+.repost h2 a {
+  color: var(--heading);
+  border-bottom: none;
+}
+
+.repost h2 a:hover {
+  color: var(--rubric);
+}
+
+.repost-audio {
+  display: block;
+  width: 100%;
+  margin: 0.4rem 0 0.9rem;
+}
+
+.repost-video {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  margin: 0.4rem 0 0.9rem;
+  background: #000;
+}
+
+.repost-commentary {
+  color: var(--muted);
+}
+
+.repost-commentary p {
+  margin-bottom: 0.8rem;
+}
+
+.repost-commentary p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Pages ---------- */
+
+.page-content h1 {
+  font-family: 'UnifrakturMaguntia', 'IM Fell English', serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 1.15;
+  color: var(--heading);
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+.page-content h1 + .page-lede {
+  margin-top: 0.5rem;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 3px double var(--rule);
+  margin-top: 3.75rem;
+  padding-top: 1.6rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer-mark {
+  color: var(--rubric);
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.footer-nav {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.footer-nav a {
+  border-bottom: none;
+  padding: 0 0.4rem;
+}
+
+.footer-invocation {
+  font-size: 0.82rem;
+  color: #b3b0a9;
+}
+
+.site-footer .footer-fine {
+  font-size: 0.76rem;
+  color: var(--faint);
+  margin-top: 0.4rem;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 1220px) {
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  html {
+    font-size: 16.5px;
+  }
+
+  body {
+    padding: 1.25rem 0.6rem;
+  }
+
+  .folio {
+    padding: 2.25rem 1.4rem 2rem;
+  }
+
+  .site-title {
+    font-size: 2.5rem;
+  }
+
+  .post-header h1 {
+    font-size: 2rem;
+  }
+
+  .post-content p,
+  .page-content p {
+    text-align: left;
+  }
+
+  .featured-entry {
+    padding: 1.4rem 1.2rem;
+  }
+}

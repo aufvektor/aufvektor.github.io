@@ -1,99 +1,86 @@
+---
+layout: default
+---
+<blockquote class="epigraph">
+  <p>Quid enim prodest homini, si mundum universum lucretur, animae vero suae detrimentum patiatur?</p>
+  <cite> - Matt 16:26</cite>
+</blockquote>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coming Soon</title>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+{% if site.posts.size > 0 %}
+{% assign latest = site.posts.first %}
 
-  html, body {
-    height: 100%;
-  }
+<section class="featured">
+  <p class="section-heading">The Latest Entry</p>
+  <article class="featured-entry">
+    <div class="post-list-meta">
+      <span class="post-list-number">Entry {% include roman.html number=site.posts.size %}{% if latest.kind %} &middot; {{ latest.kind }}{% endif %}</span>
+      <time datetime="{{ latest.date | date_to_xmlschema }}">{{ latest.date | date: "%-d %B %Y" }}</time>
+    </div>
+    <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
+    <p class="post-list-excerpt">{{ latest.excerpt | strip_html | truncate: 340 }}</p>
+    <p class="post-list-more"><a href="{{ latest.url | relative_url }}">Continue reading &rarr;</a></p>
+  </article>
+</section>
 
-  body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: #0a0a0a;
-    color: #ececec;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+{% if site.posts.size > 1 %}
+<section class="post-list">
+  <p class="section-heading">The Record</p>
+  {% for post in site.posts offset: 1 %}
+  {% assign entry_number = site.posts.size | minus: forloop.index0 | minus: 1 %}
+  <article class="post-list-item">
+    <div class="post-list-meta">
+      <span class="post-list-number">Entry {% include roman.html number=entry_number %}{% if post.kind %} &middot; {{ post.kind }}{% endif %}</span>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
+    </div>
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p class="post-list-excerpt">{{ post.excerpt | strip_html | truncate: 220 }}</p>
+    <p class="post-list-more"><a href="{{ post.url | relative_url }}">Continue reading &rarr;</a></p>
+  </article>
+  {% endfor %}
+  <p class="archive-pointer"><a href="{{ '/archive/' | relative_url }}">The complete archive &rarr;</a></p>
+</section>
+{% endif %}
 
-  h1 {
-    font-weight: 400;
-    font-size: clamp(3rem, 10vw, 5.5rem);
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
+{% else %}
+<p class="empty-note">No writings have been published at present.</p>
+{% endif %}
 
-  .sound-btn {
-    position: fixed;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: none;
-    border: 1px solid #333;
-    color: #ececec;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 50%;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color 0.25s ease;
-  }
+{% if site.data.reading %}
+<section class="reading">
+  <p class="section-heading">Currently Reading</p>
+  {% if site.data.reading.current and site.data.reading.current.size > 0 %}
+  <ul class="reading-list">
+    {% for book in site.data.reading.current %}
+    <li>
+      <span class="reading-title">{{ book.title }}</span>
+      <span class="reading-author">{{ book.author }}</span>
+      {% if book.begun %}<span class="reading-since">taken up {{ book.begun }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if site.data.reading.next and site.data.reading.next.size > 0 %}
+  <p class="reading-subheading">Reading Next</p>
+  <ul class="reading-list">
+    {% for book in site.data.reading.next %}
+    <li>
+      <span class="reading-title">{{ book.title }}</span>
+      <span class="reading-author">{{ book.author }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
+{% endif %}
 
-  .sound-btn:hover {
-    border-color: #666;
-  }
-
-  .sound-btn svg {
-    width: 0.95rem;
-    height: 0.95rem;
-    fill: currentColor;
-  }
-</style>
-</head>
-<body>
-
-  <h1>Coming Soon</h1>
-
-  <button class="sound-btn" id="soundToggle" aria-label="Play music">
-    <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-    <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-  </button>
-
-  <!-- Replace "lilium.mp3" with the path to your audio file -->
-  <audio id="bgAudio" loop>
-    <source src="lilium.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const audio = document.getElementById('bgAudio');
-    const btn = document.getElementById('soundToggle');
-    const playIcon = document.getElementById('playIcon');
-    const pauseIcon = document.getElementById('pauseIcon');
-
-    btn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
-        btn.setAttribute('aria-label', 'Pause music');
-      } else {
-        audio.pause();
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-        btn.setAttribute('aria-label', 'Play music');
-      }
-    });
-  </script>
-</body>
-</html>
+{% assign latest_sententia = site.data.commonplace | first %}
+{% if latest_sententia %}
+<section class="commonplace-teaser">
+  <p class="section-heading">From the Commonplace Book</p>
+  <blockquote class="epigraph">
+    <p>{{ latest_sententia.quote }}</p>
+    <cite>&mdash; {{ latest_sententia.source }}</cite>
+  </blockquote>
+  <p class="archive-pointer"><a href="{{ '/commonplace/' | relative_url }}">The full collection &rarr;</a></p>
+</section>
+{% endif %}

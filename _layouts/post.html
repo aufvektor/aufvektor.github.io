@@ -1,0 +1,142 @@
+---
+layout: default
+---
+{% for p in site.posts %}{% if p.url == page.url %}{% assign entry_number = site.posts.size | minus: forloop.index0 %}{% endif %}{% endfor %}
+<article class="post">
+  <header class="post-header">
+    <p class="post-kicker">Entry {% include roman.html number=entry_number %}{% if page.kind %} &middot; {{ page.kind }}{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="post-header-rule">&#10016;</p>
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
+  </header>
+
+  {% if page.image %}
+  {% assign img_path = page.image %}
+  {% assign img_first = img_path | slice: 0, 1 %}
+  {% unless img_first == "/" or img_path contains "://" %}{% assign img_path = img_path | prepend: "/" %}{% endunless %}
+  <figure class="entry-figure">
+    <img src="{{ img_path | relative_url }}" alt="{{ page.image_alt | default: page.image_caption | default: page.title }}">
+    {% if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  <div class="post-content dropcap">
+    {{ content }}
+  </div>
+
+  {% if page.pages %}
+  <section class="manuscript">
+    {% for leaf in page.pages %}
+    {% if leaf.image %}{% assign leaf_src = leaf.image %}{% else %}{% assign leaf_src = leaf %}{% endif %}
+    <figure class="entry-figure manuscript-leaf">
+      <img src="{{ leaf_src | relative_url }}" alt="Leaf {{ forloop.index }} of the handwritten entry" loading="lazy">
+      <figcaption>Leaf {% include roman.html number=forloop.index %}</figcaption>
+      {% if leaf.text %}<div class="leaf-text">{{ leaf.text | markdownify }}</div>{% endif %}
+    </figure>
+    {% endfor %}
+  </section>
+  <script>
+    (function () {
+      var section = document.querySelector('.manuscript');
+      if (!section) return;
+      var leaves = Array.prototype.map.call(
+        section.querySelectorAll('.manuscript-leaf'), function (fig) {
+          var text = fig.querySelector('.leaf-text');
+          return {
+            src: fig.querySelector('img').getAttribute('src'),
+            text: text ? text.innerHTML : ''
+          };
+        });
+      if (leaves.length < 2) return;
+
+      function roman(n) {
+        var vals = [[10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+        var out = '';
+        for (var i = 0; i < vals.length; i++) {
+          while (n >= vals[i][0]) { out += vals[i][1]; n -= vals[i][0]; }
+        }
+        return out;
+      }
+
+      /* spreads as in a real book: the first leaf stands alone as a recto */
+      var spreads = [[-1, 0]];
+      for (var i = 1; i < leaves.length; i += 2) {
+        spreads.push([i, i + 1 < leaves.length ? i + 1 : -1]);
+      }
+      var current = 0;
+
+      var viewer = document.createElement('div');
+      viewer.className = 'codex-viewer';
+      viewer.innerHTML =
+        '<div class="codex-spread">' +
+        '<div class="codex-page codex-page-left"><img alt=""></div>' +
+        '<div class="codex-page codex-page-right"><img alt=""></div>' +
+        '</div>' +
+        '<div class="codex-texts">' +
+        '<div class="codex-text codex-text-left"></div>' +
+        '<div class="codex-text codex-text-right"></div>' +
+        '</div>' +
+        '<p class="codex-caption"></p>' +
+        '<p class="codex-hint">Click the right leaf to turn forward; the left, to turn back.</p>';
+      section.style.display = 'none';
+      section.parentNode.insertBefore(viewer, section);
+
+      var leftPage = viewer.querySelector('.codex-page-left');
+      var rightPage = viewer.querySelector('.codex-page-right');
+      var texts = viewer.querySelector('.codex-texts');
+      var leftText = viewer.querySelector('.codex-text-left');
+      var rightText = viewer.querySelector('.codex-text-right');
+      var caption = viewer.querySelector('.codex-caption');
+      var total = roman(leaves.length);
+
+      function setPage(pageEl, textEl, idx) {
+        var img = pageEl.querySelector('img');
+        if (idx >= 0) {
+          img.src = leaves[idx].src;
+          img.style.display = 'block';
+          pageEl.classList.remove('codex-blank');
+          textEl.innerHTML = leaves[idx].text;
+        } else {
+          img.removeAttribute('src');
+          img.style.display = 'none';
+          pageEl.classList.add('codex-blank');
+          textEl.innerHTML = '';
+        }
+      }
+
+      function render() {
+        var spread = spreads[current];
+        setPage(leftPage, leftText, spread[0]);
+        setPage(rightPage, rightText, spread[1]);
+        texts.style.display =
+          (leftText.innerHTML || rightText.innerHTML) ? '' : 'none';
+        leftPage.classList.toggle('codex-end', current === 0);
+        rightPage.classList.toggle('codex-end', current === spreads.length - 1);
+        var shown = [];
+        if (spread[0] >= 0) shown.push(roman(spread[0] + 1));
+        if (spread[1] >= 0) shown.push(roman(spread[1] + 1));
+        caption.textContent = (shown.length > 1 ? 'Leaves ' : 'Leaf ')
+          + shown.join('–') + ' of ' + total;
+      }
+
+      function back() { if (current > 0) { current--; render(); return true; } return false; }
+      function forward() { if (current < spreads.length - 1) { current++; render(); return true; } return false; }
+
+      leftPage.addEventListener('click', back);
+      rightPage.addEventListener('click', forward);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft' && back()) e.preventDefault();
+        if (e.key === 'ArrowRight' && forward()) e.preventDefault();
+      });
+
+      render();
+    })();
+  </script>
+  {% endif %}
+
+  <p class="post-end">&#10016;</p>
+
+  <nav class="post-nav">
+    <a href="{{ '/' | relative_url }}">&larr; Return to the writings</a>
+  </nav>
+</article>

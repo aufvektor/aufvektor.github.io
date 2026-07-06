@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} &middot; {{ site.title }}{% else %}{{ site.title }} &middot; {{ site.description }}{% endif %}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+  <div class="folio">
+
+    <header class="masthead">
+      <p class="masthead-cross">&#10016;</p>
+      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <p class="site-motto">Ad perpetuam rei memoriam</p>
+      <p class="site-tagline">{{ site.description }}</p>
+      <nav class="site-nav">
+        <a href="{{ '/' | relative_url }}">Writings</a>
+        <span class="nav-sep">&#10013;</span>
+        <a href="{{ '/archive/' | relative_url }}">Archive</a>
+        <span class="nav-sep">&#10013;</span>
+        <a href="{{ '/commonplace/' | relative_url }}">Commonplace</a>
+        <span class="nav-sep">&#10013;</span>
+        <a href="{{ '/reposts/' | relative_url }}">Reposts</a>
+        <span class="nav-sep">&#10013;</span>
+        <a href="{{ '/links/' | relative_url }}">Links</a>
+        <span class="nav-sep">&#10013;</span>
+        <a href="{{ '/about/' | relative_url }}">About</a>
+      </nav>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-mark">&#10016;</p>
+      <nav class="footer-nav">
+        <a href="{{ '/archive/' | relative_url }}">Archive</a>
+        <span class="nav-sep">&middot;</span>
+        <a href="{{ '/commonplace/' | relative_url }}">Commonplace</a>
+        <span class="nav-sep">&middot;</span>
+        <a href="{{ '/reposts/' | relative_url }}">Reposts</a>
+        <span class="nav-sep">&middot;</span>
+        <a href="{{ '/links/' | relative_url }}">Links</a>
+        <span class="nav-sep">&middot;</span>
+        <a href="{{ '/colophon/' | relative_url }}">Colophon</a>
+      </nav>
+      <p class="footer-invocation">Christe Eleison</p>
+      <p class="footer-invocation">Sancte Pie Decime &mdash; ora pro nobis</p>
+      <p class="footer-fine">Anno Domini MMXXVI &middot; &copy; {{ site.time | date: "%Y" }} {{ site.title }}. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

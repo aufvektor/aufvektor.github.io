@@ -1,0 +1,7 @@
+{% assign fig_src = include.src %}
+{% assign fig_first = fig_src | slice: 0, 1 %}
+{% unless fig_first == "/" or fig_src contains "://" %}{% assign fig_src = fig_src | prepend: "/" %}{% endunless %}
+<figure class="entry-figure">
+  <img src="{{ fig_src | relative_url }}" alt="{{ include.alt | default: include.caption }}" loading="lazy">
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
