@@ -14,7 +14,7 @@ permalink: /reposts/
       <time datetime="{{ repost.date | date_to_xmlschema }}">{{ repost.date | date: "%-d %B %Y" }}</time>
     </div>
     {% if repost.link %}
-    <h2><a href="{{ repost.link }}" rel="noopener">{{ repost.title }}&nbsp;&#8599;</a></h2>
+    <h2><a href="{{ repost.link }}" rel="noopener">{{ repost.title }}&nbsp;&#8599;&#xFE0E;</a></h2>
     {% else %}
     <h2>{{ repost.title }}</h2>
     {% endif %}
