@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Obligations of the Third Order of the SSPX"
-kind: Observation
+kind: Inferior Summary
 image: /assets/images/sspx_consecrations.jpg
 ---
+Because I have found documentation pertaining the order difficult to find, I have decided to list them here for my easy access
 
 ## Personal Obligations:
 - Daily:
@@ -30,8 +31,7 @@ on Ash Wednesday, and Holy Saturday.
 
 ## Documentation
 
-Because I have found documentation pertaining the order difficult to find, I have decided to list links here:
+- [Third Order Handbook](https://vancouver.sspx.ca/sites/default/files/documents/ThirdOrderHandbookEnglish.pdf)
+- [Letter on the Rule](https://dickinson.tx.sspx.org/sites/default/files/documents/4-Third%20Order%20Newsletter_Christmas%202013_No4_0.pdf)
 
-https://vancouver.sspx.ca/sites/default/files/documents/ThirdOrderHandbookEnglish.pdf
-
-https://dickinson.tx.sspx.org/sites/default/files/documents/4-Third%20Order%20Newsletter_Christmas%202013_No4_0.pdf
+I note that the role is avaible in the SSPX's book 'Christian Warfare'.
