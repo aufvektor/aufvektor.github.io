@@ -23,7 +23,7 @@ Every two years:
  - a retreat.
 
 ## Practical Notes:
-Recommended reading: The acts of St. Pius X,
+ - Recommended reading: The acts of St. Pius X,
 the Catechism of the Council of Trent, the New
 Testament, the Imitation of Christ, the lives of the
 saints. Try to spread good reading material.
