@@ -22,8 +22,7 @@ Motivated by this pattern, today I list questions which I still do not yet under
  - Under what circumstances must I obey the Vicar of Christ and his suboridinates, in lieu of the degeneration of the Catholic Church? (Or, dare I ask, is the seat vacant?)
  - Are the excommunications of the Society of Saint Pius X valid?
  - What actions am I supposed to take with respect to the ongoing mass extinction event of the European race?
- - What kind of authority, if any, ought the European excercise, if he has it, over the other races? Must the European directly rule, and under what circumstances can he disregard the will of the other races?
- - What am I supposed to do in general? (Perhaps I know the answer to this one already - I am only given the minimal light that I require. I am not supposed to understand the big picture.)'
+ - What am I supposed to do in general? (Perhaps I know the answer to this one already - I am only given the minimal light that I require. I am not supposed to understand the big picture.)
  - Under what circumstances I am obliged to instruct others? (It never almost never works anyways)
  - Is it probable to have friends without maintaining a persona?
  - Is it probable to ever find a woman suitable for marriage? (This isn't even a question that I should state.)
