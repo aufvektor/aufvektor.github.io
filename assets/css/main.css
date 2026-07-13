@@ -480,6 +480,11 @@ hr::after {
   box-shadow: 0 0 0 3px var(--panel-deep), 0 0 0 4px var(--rule);
 }
 
+.entry-audio audio {
+  display: block;
+  width: 100%;
+}
+
 .entry-video-frame {
   aspect-ratio: 16 / 9;
   background: #000;

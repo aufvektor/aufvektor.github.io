@@ -1,0 +1,9 @@
+{% assign aud_src = include.src %}
+{% assign aud_first = aud_src | slice: 0, 1 %}
+{% unless aud_first == "/" or aud_src contains "://" %}{% assign aud_src = aud_src | prepend: "/" %}{% endunless %}
+<figure class="entry-figure entry-audio">
+  <audio controls preload="none" src="{{ aud_src | relative_url }}">
+    <a href="{{ aud_src | relative_url }}">Download the recording</a>.
+  </audio>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
